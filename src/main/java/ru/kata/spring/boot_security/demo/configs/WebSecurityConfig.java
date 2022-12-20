@@ -64,41 +64,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationProvider;
     }
 
-    public class Test1 {
-        public void init() {
-            Role roleUser = new Role("ROLE_USER");
-            Role roleAdmin = new Role("ROLE_ADMIN");
-            userService.save(roleUser);
-            userService.save(roleAdmin);
-            User admin1 = new User("admin1", "admin1"
-                    , "admin1", "admin1", 1
-                    , "admin1@mail.ru", new HashSet<>(Arrays.asList(roleUser, roleAdmin)));
-            userService.save(admin1);
-
-            User admin2 = new User("admin2", "admin2"
-                    , "admin2", "admin2", 1
-                    , "admin2@mail.ru", new HashSet<>(Arrays.asList(roleAdmin)));
-            userService.save(admin2);
-
-            User user1 = new User("user1", "user1"
-                    , "user1", "user1", 1
-                    ,"user1@mail.ru", new HashSet<>(Arrays.asList(roleUser)));
-            userService.save(user1);
-
-            User user2 = new User("user2", "user2"
-                    , "user2", "user2", 1
-                    , "user2@mail.ru", new HashSet<>(Arrays.asList(roleUser)));
-            userService.save(user2);
-
-            User user3 = new User("qw", "qw"
-                    , "qwN", "qwS", 45
-                    , "qw@qw", new HashSet<>(Arrays.asList(roleAdmin)));
-            userService.save(user3);
-        }
-
-        @Bean(initMethod = "init")
-        Test1 test1() {
-            return new Test1();
-        }
-    }
 }
