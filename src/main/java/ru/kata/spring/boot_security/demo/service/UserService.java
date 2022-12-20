@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService  {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -36,9 +36,9 @@ public class UserService implements UserDetailsService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
-    }
+//    public List<Role> getAllRoles() {
+//        return roleRepository.findAll();
+//    }
 
     @Transactional
     public void save(User user) {
@@ -76,21 +76,21 @@ public class UserService implements UserDetailsService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("User with %s not found =(", email));
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), mapRolesToAuthorities(user.getRoles()));
-    }
+//
+//    public User findByEmail(String email) {
+//        return userRepository.findByEmail(email);
+//    }
+//
+//    @Override
+//    @Transactional(readOnly = true)
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        User user = userRepository.findByEmail(email);
+//        if (user == null) {
+//            throw new UsernameNotFoundException(String.format("User with %s not found =(", email));
+//        }
+//        return new org.springframework.security.core.userdetails.User(user.getUsername(),
+//                user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+//    }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
