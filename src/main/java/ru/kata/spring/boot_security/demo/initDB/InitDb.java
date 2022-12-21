@@ -40,11 +40,11 @@ public class InitDb {
             userRoles.add(userRole);
 
 
-            userService.save(new User("test@mail.com", "test", "test", "test",  24, testRoles));
-            userService.save(new User("admin@mail.com", "admin", "admin", "admin", 45, adminRoles));
-            userService.save(new User("user@mail.com", "user", "user", "user", 35, userRoles));
-            userService.save(new User("q", "q", "q", "q", 35,testRoles ));
-            userService.save(new User("a", "a", "a", "a", 55,userRoles ));
+            userService.createUser(new User("test@mail.com", "test", "test", "test",  24, testRoles));
+            userService.createUser(new User("admin@mail.com", "admin", "admin", "admin", 45, adminRoles));
+            userService.createUser(new User("user@mail.com", "user", "user", "user", 35, userRoles));
+            userService.createUser(new User("q", "q", "q", "q", 35,testRoles ));
+            userService.createUser(new User("a", "a", "a", "a", 55,userRoles ));
 
         }
     }

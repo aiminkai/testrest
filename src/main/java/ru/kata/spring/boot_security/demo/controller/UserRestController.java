@@ -25,8 +25,8 @@ public class UserRestController {
 
     @GetMapping()
     public ResponseEntity<User> getUser(Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        if (userService.getUser(user.getId()) == null) {
+        User user = userService.getUserByUsername(principal.getName());
+        if (userService.getUserById(user.getId()) == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } else {
             return ResponseEntity.ok(user);

@@ -29,7 +29,7 @@ public class AdminRestController {
     @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
-            userService.save(user);
+            userService.createUser(user);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")
                     .buildAndExpand(user.getId())
@@ -41,9 +41,9 @@ public class AdminRestController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> editUser(@PathVariable long id, @RequestBody User user) {
+    public ResponseEntity<User> editUser(@RequestBody User user) {
         try {
-            userService.editUser(id, user);
+            userService.updateUser(user);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
