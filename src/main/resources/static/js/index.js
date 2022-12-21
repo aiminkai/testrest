@@ -12,14 +12,14 @@ const userPageBtnEl = $('#user-page-btn')
 
 class User {
     constructor(id = 0, username = '', password = '', name = '',
-                surname = '', age = 0, email = '', roles = []) {
+                surname = '', age = 0, roles = []) {
         this.id = id
         this.username = username
         this.password = password
         this.name = name
         this.surname = surname
         this.age = age
-        this.email = email
+       // this.email = email
         this.roles = roles
     }
 
@@ -30,7 +30,7 @@ class User {
         this.name = data.get('firstName')
         this.surname = data.get('lastName')
         this.age = data.get('age')
-        this.email = data.get('email')
+        this.username = data.get('username')
         this.password = data.get('password')
 
         const auth = new Roles()
@@ -107,7 +107,7 @@ getLoggedUser()
     .then(user => {
         const auth = new Roles()
         user.roles.map(obj => auth.addFromObject(obj))
-        loggedUserRolesEl.children()[0].innerHTML = user.email
+        loggedUserRolesEl.children()[0].innerHTML = user.username
         loggedUserRolesEl.children()[1].innerHTML = auth.toString()
         if (auth.includes('ADMIN')) {
             adminTableRows.push(getUserTableRowTemplate(user))
@@ -241,9 +241,9 @@ async function createUser(user) {
         const user = await response.json()
         allUsers.push(user)
         renderUsersTable([user])
-        alertMessage(`User ${user.email} is successfully created`, 'success')
+        alertMessage(`User ${user.username} is successfully created`, 'success')
     } else {
-        alertMessage(`User ${user.email} is already exists`, 'danger')
+        alertMessage(`User ${user.username} is already exists`, 'danger')
     }
 }
 
@@ -331,7 +331,7 @@ function getUserTableRowTemplate(user) {
             <td>${user.name}</td>
             <td>${user.surname}</td>
             <td>${user.age}</td>
-            <td>${user.email}</td>
+            <td>${user.username}</td>
             <td>${user.roles.map(a => a.name.replace('ROLE_', '')).join(' ')}</td>
             <td id="td-edit-btn">
                 <button type="button" class="btn text-white" id="userEditBtn"
@@ -356,7 +356,7 @@ function getModal(user, roles, type) {
     if (type === 'edit') {
         btnClass = 'btn btn-primary'
         btnText = 'Save'
-        user.password = ''
+       // user.password = ''
     } else if (type === 'delete') {
         hidden = 'hidden'
         disabled = 'disabled'
@@ -412,21 +412,21 @@ function getModal(user, roles, type) {
                                 </div>
     
                                 <div class="row mb-4">
-                                    <label for="email" class="fw-bold text-center">Email</label>
-                                    <input type="email" id="email"
+                                    <label for="username" class="fw-bold text-center">Email</label>
+                                    <input type="text" id="username"
                                            class="form-control" 
-                                           name="email"
-                                           value="${user.email}"
+                                           name="username"
+                                           value="${user.username}"
                                            ${disabled}>
                                 </div>
     
-                                <div class="row mb-4" ${hidden}>
+                                <div class="row mb-4">
                                     <label for="password" class="fw-bold text-center">Password</label>
                                     <input type="password" id="password"
                                            class="form-control"
                                            name="password"
                                            value="${user.password}"
-                                           ${disabled}>
+                                        
                                 </div>
     
                                 <div class="row mb-4">

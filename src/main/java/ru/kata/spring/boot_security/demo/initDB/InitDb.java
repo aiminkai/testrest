@@ -41,29 +41,29 @@ public class InitDb {
             List<Role> userRoles = new ArrayList<>();
             userRoles.add(userRole);
 
-            User admin1 = new User("admin1", "admin1"
+            User admin1 = new User("admin1@mail.ru", "admin1"
                     , "admin1", "admin1", 10
-                    , "admin1@mail.ru", new HashSet<>(Arrays.asList(userRole, adminRole)));
+                    ,  new HashSet<>(Arrays.asList(userRole, adminRole)));
             userService.save(admin1);
 
-            User admin2 = new User("admin2", "admin2"
+            User admin2 = new User("admin2@mail.ru", "admin2"
                     , "admin2", "admin2", 20
-                    , "admin2@mail.ru", new HashSet<>(Arrays.asList(adminRole)));
+                    , new HashSet<>(Arrays.asList(adminRole)));
             userService.save(admin2);
 
-            User user1 = new User("user1", "user1"
+            User user1 = new User("user1@mail.ru", "user1"
                     , "user1", "user1", 34
-                    ,"user1@mail.ru", new HashSet<>(Arrays.asList(userRole)));
+                    , new HashSet<>(Arrays.asList(userRole)));
             userService.save(user1);
 
-            User user2 = new User("user2", "user2"
+            User user2 = new User("user2@mail.ru", "user2"
                     , "user2", "user2", 35
-                    , "user2@mail.ru", new HashSet<>(Arrays.asList(userRole)));
+                    ,  new HashSet<>(Arrays.asList(userRole)));
             userService.save(user2);
 
-            User user3 = new User("qw", "qw"
+            User user3 = new User("qw@qw", "qw"
                     , "qwN", "qwS", 45
-                    , "qw@qw", new HashSet<>(Arrays.asList(adminRole)));
+                    , new HashSet<>(Arrays.asList(adminRole)));
             userService.save(user3);
 
         }

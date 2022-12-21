@@ -16,20 +16,19 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column//(name = "username", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String username;
-    @Column
+    @Column(name = "password")
     private String password;
-    @Column
+    @Column(name = "name")
     private String name;
-    @Column
+    @Column(name = "surname")
     private String surname;
-    @Column
-    private String email;
-    @Column
+    @Column(name = "age")
     private int age;
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
@@ -38,14 +37,13 @@ public class User implements UserDetails {
     private Set<Role> roles;
     public User() {
     }
-    public User(String username, String password, String name, String surname
-            , int age, String email, Set<Role> roles) {
+    public User(String username, String password, String name, String surname,
+            int age, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.email = email;
         this.roles = roles;
     }
 
@@ -141,37 +139,4 @@ public class User implements UserDetails {
         }
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, surname, email, age, username);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj == null || getClass() != this.getClass()) {
-            return false;
-        }
-        User that = (User) obj;
-        return Objects.equals(name, that.name)
-                && Objects.equals(surname, that.surname)
-                && Objects.equals(email, that.email)
-                && Objects.equals(age, that.age)
-                && Objects.equals(username, that.username);
-    }
-
-    @Override
-    public String toString() {
-        return "User{%s: %s}".formatted(id, email);
-    }
 }

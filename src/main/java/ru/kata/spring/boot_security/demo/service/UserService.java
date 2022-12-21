@@ -43,7 +43,7 @@ public class UserService  {
     @Transactional
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setUsername(user.getEmail());
+        user.setUsername(user.getUsername());
         userRepository.save(user);
     }
 
@@ -65,9 +65,9 @@ public class UserService  {
     public void editUser(Long id, User user) {
         User userToBeEdited = userRepository.getById(id);
         userToBeEdited.setName(user.getName());
-        userToBeEdited.setUsername(user.getEmail());
+        userToBeEdited.setUsername(user.getUsername());
         userToBeEdited.setPassword(passwordEncoder.encode(user.getPassword()));
-        userToBeEdited.setEmail(user.getEmail());
+       //userToBeEdited.setEmail(user.getEmail());
         userToBeEdited.setRoles(user.getRoles());
         userToBeEdited.setAge(user.getAge());
         userToBeEdited.setSurname(user.getSurname());
